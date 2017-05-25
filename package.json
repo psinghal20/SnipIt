@@ -1,0 +1,17 @@
+{
+  "name": "fileupload",
+  "version": "1.0.0",
+  "description": "A simple file upload and save in database script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BakarRaja",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "formidable": "^1.1.1",
+    "fs": "0.0.1-security",
+    "pug": "^2.0.0-rc.1"
+  }
+}
