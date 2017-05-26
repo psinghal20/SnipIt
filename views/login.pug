@@ -1,0 +1,10 @@
+html
+	head
+		title Login
+	body
+		if(message)
+			h4 #{message}
+		form(action="/login" method="POST")
+			input(name="userid" type="text" required placeholder="User ID")
+			input(name="password" type="password" required placeholder="Password")
+			button(type="submit") Sign Up
