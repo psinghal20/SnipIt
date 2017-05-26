@@ -102,7 +102,15 @@ function checksignin(req,res,next){
 }
 
 app.get('/protected_page',checksignin,function(req,res){
-	res.render('upload',{userid:req.session.user.userid});
+	connection.query('SELECT * FROM uploads where userid = ?',[req.session.user.userid],function(err,result){
+			if(err){
+				res.render('upload');
+			}
+			else{
+				
+				res.render('upload',{userid:req.session.user.userid,result:result});
+			}
+	});
 });
 
 app.use('/protected_page',function(err,req,res,next){
@@ -144,6 +152,6 @@ app.post('/upload',function(req,res){
 
 });
 
-http.listen(3330,function(){
-	console.log('listening on *:3330');
+http.listen(3230,function(){
+	console.log('listening on *:3230');
 });
