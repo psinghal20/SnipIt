@@ -1,0 +1,5 @@
+html
+	body
+		form(action='/edit/'+file, method='POST')
+			textarea(name='editarea' rows='60' cols='100')=contents
+			button(type="submit") Submit Changes

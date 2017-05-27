@@ -158,17 +158,10 @@ app.get('/protected_page/:file',function(req,res){
 	
 	var filename = req.params.file;
 	
-	connection.query("SELECT * FROM uploads where userid ='"+req.session.user.userid+"' AND filename='"+filename+"'",function(err,result){
-			if(err){
-				res.redirect('/protected_page');
-			}
-			else{
-				console.log(result);
-				fs.readFile(result[0].filepath,'utf8',function(err,contents){
+	fs.readFile('uploads/'+req.session.user.userid+'/'+filename,'utf8',function(err,contents){
 					res.render('files',{contents:contents,file:filename});
-				});
-			}
 	});
+	
 });
 
 app.get('/delete/:filename',function(req,res){
@@ -189,6 +182,25 @@ app.get('/delete/:filename',function(req,res){
 	
 	});	
 
+});
+
+app.get('/edit/:filename',function(req,res){
+	var filename = req.params.filename;
+	
+	fs.readFile('uploads/'+req.session.user.userid+'/'+filename,'utf8',function(err,contents){
+		res.render('edit',{contents:contents,file:filename});
+	});
+});
+
+app.post('/edit/:filename',function(req,res){
+	var filename = req.params.filename;
+	fs.writeFile('uploads/'+req.session.user.userid+'/'+filename,req.body.editarea,'utf8',function(err){
+		if(err){
+			console.log(err);
+		}
+		console.log('written');
+		res.redirect('/protected_page');
+	});
 });
 
 http.listen(3340,function(){
