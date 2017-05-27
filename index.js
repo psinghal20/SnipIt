@@ -203,6 +203,11 @@ app.post('/edit/:filename',function(req,res){
 	});
 });
 
+app.get('/download/:filename',function(req,res){
+	var filename = req.params.filename;
+	res.download('uploads/'+req.session.user.userid+'/'+filename);
+});
+
 http.listen(3340,function(){
 	console.log('listening on *:3340');
 });
