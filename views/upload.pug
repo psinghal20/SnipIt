@@ -6,4 +6,6 @@ html
 			input(type='submit' value='upload!')
 		ul
 			each file in result
-				li #{file.filename}
+				li 
+					a(href='/protected_page/'+file.filename) #{file.filename}
+		a(href='/logout') logout

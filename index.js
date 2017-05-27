@@ -9,6 +9,7 @@ var connection = require('./config');
 var bcrypt = require('bcrypt');
 var fs = require('fs');
 var mkdir = require('make-dir');
+var fse = require('fs-extra');
 
 app.use(fileupload());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -141,9 +142,10 @@ app.post('/upload',function(req,res){
 			
 			if(err){
 				console.log(err);
-				res.redirect('/upload');
+				res.redirect('/protected_page');
 			}else{
-				res.send('file uploaded');
+				console.log('file uploaded');
+				res.redirect('/protected_page');
 			}
 		
 		});
@@ -152,6 +154,43 @@ app.post('/upload',function(req,res){
 
 });
 
-http.listen(3230,function(){
-	console.log('listening on *:3230');
+app.get('/protected_page/:file',function(req,res){
+	
+	var filename = req.params.file;
+	
+	connection.query("SELECT * FROM uploads where userid ='"+req.session.user.userid+"' AND filename='"+filename+"'",function(err,result){
+			if(err){
+				res.redirect('/protected_page');
+			}
+			else{
+				console.log(result);
+				fs.readFile(result[0].filepath,'utf8',function(err,contents){
+					res.render('files',{contents:contents,file:filename});
+				});
+			}
+	});
+});
+
+app.get('/delete/:filename',function(req,res){
+	
+	var filename = req.params.filename;
+	
+	connection.query("DELETE FROM uploads WHERE userid = '"+req.session.user.userid+"' AND filename = '"+filename+"'",function(err,result){
+		
+		fs.unlink('uploads/'+req.session.user.userid+'/'+filename,function(err){
+			if(err){
+				console.log(err);
+			}
+			console.log('removed');
+			
+			res.redirect('/protected_page');
+		
+		});
+	
+	});	
+
+});
+
+http.listen(3340,function(){
+	console.log('listening on *:3340');
 });
