@@ -1,9 +1,6 @@
 var bcrypt = require('bcrypt');
-var fs = require('fs');
-var mkdir = require('make-dir');
-var fse = require('fs-extra');
+var models = require('./../models/user-model');
 var connection = require('./../config');
-
 
 exports.login_get = function(req,res){
 	res.render('login');
@@ -19,7 +16,7 @@ exports.login_post = function(req,res){
 			userid:req.body.userid,
 			password:req.body.password
 		}
-		connection.query('SELECT * FROM users where userid = ?',[user.userid],function(err,result){
+		models.get_user_data(user.userid,function(err,result){
 			if(err){
 				res.render('login',{message:'Invalid Credentials!'});
 			}
@@ -54,7 +51,7 @@ exports.signup_post = function(req,res){
 			userid:req.body.userid,
 			passwordhash:hash,
 		}
-		connection.query("INSERT INTO users (userid,password) VALUES ('"+user.userid+"','"+user.passwordhash+"')",function(err,result){
+		models.insert_user_data(user.userid,user.passwordhash,function(err,result){
 			if(err){
 				console.log(err);
 				res.render('signup',{message:'User already exists!'});
@@ -84,7 +81,7 @@ exports.checksignin = function (req,res,next){
 }
 
 exports.protected_page_get = function(req,res){
-	connection.query('SELECT * FROM uploads where userid = ?',[req.session.user.userid],function(err,result){
+	models.get_user_upload_data(req.session.user.userid,function(err,result){
 			if(err){
 				res.render('upload');
 			}
@@ -108,17 +105,12 @@ exports.upload_post = function(req,res){
 
 	var sampleFile = req.files.sampleFile;
 
-	mkdir('uploads/'+req.session.user.userid);
-
-	sampleFile.mv('uploads/'+req.session.user.userid+'/'+sampleFile.name,function(err){
+	models.upload_file(req.session.user.userid,sampleFile,function(err){
 		
 		if(err){
 			return res.status(500).send(err);
 		}
-		
-		var stats = fs.statSync('uploads/'+req.session.user.userid+'/'+sampleFile.name);
-		
-		connection.query("INSERT INTO uploads (userid,filename,filesize,filepath) VALUES ('"+req.session.user.userid+"','"+sampleFile.name+"','"+stats.size+"','"+"uploads/"+req.session.user.userid+'/'+sampleFile.name+"')",function(err,result){
+		models.insert_upload_data(req.session.user.userid,sampleFile.name,function(err,result){
 			
 			if(err){
 				console.log(err);
@@ -129,37 +121,34 @@ exports.upload_post = function(req,res){
 			}
 		
 		});
-	
 	});
-
 }
 
 exports.file_get = function(req,res){
 	
 	var filename = req.params.file;
 	
-	fs.readFile('uploads/'+req.session.user.userid+'/'+filename,'utf8',function(err,contents){
+	models.get_file_data(req.session.user.userid,filename,function(err,contents){
 					res.render('files',{contents:contents,file:filename});
 	});
-	
 }
 
 exports.delete_get = function(req,res){
 	
 	var filename = req.params.filename;
 	
-	connection.query("DELETE FROM uploads WHERE userid = '"+req.session.user.userid+"' AND filename = '"+filename+"'",function(err,result){
-		
-		fs.unlink('uploads/'+req.session.user.userid+'/'+filename,function(err){
+	models.delete_file(req.session.user.userid,filename,function(err){
+		if(err){
+				console.log(err);
+			}
+		models.delete_upload_data(req.session.user.userid,filename,function(err,result){
 			if(err){
 				console.log(err);
 			}
 			console.log('removed');
 			
 			res.redirect('/protected_page');
-		
 		});
-	
 	});	
 
 }
@@ -167,19 +156,19 @@ exports.delete_get = function(req,res){
 exports.edit_get = function(req,res){
 	var filename = req.params.filename;
 	
-	fs.readFile('uploads/'+req.session.user.userid+'/'+filename,'utf8',function(err,contents){
+	models.get_file_data(req.session.user.userid,filename,function(err,contents){
 		res.render('edit',{contents:contents,file:filename});
 	});
 }
 
 exports.edit_post = function(req,res){
 	var filename = req.params.filename;
-	fs.writeFile('uploads/'+req.session.user.userid+'/'+filename,req.body.editarea,'utf8',function(err){
+	models.write_file_data(req.session.user.userid,filename,req.body.editarea,function(err){
 		if(err){
 			console.log(err);
 		}
 		console.log('written');
-		res.redirect('/protected_page');
+		res.redirect('/protected_page/'+filename);
 	});
 }
 
