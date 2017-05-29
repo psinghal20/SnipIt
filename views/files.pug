@@ -1,4 +1,6 @@
 html
+	head
+		link(rel="stylesheet" type="text/css" href="/jquery-linedtextarea.css")
 	body
 		h4 #{file}
 		if fileuser
@@ -11,5 +13,12 @@ html
 			a(href='/edit/'+file) edit
 			br
 			a(href='/download/'+file) Download
-		pre
-			| #{contents}
+		
+		textarea(name='editarea' class='lined' style="height:80%" cols='100' readonly)=contents
+
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript")
+
+		script(src="/jquery-linedtextarea.js" type="text/javascript")
+		
+		script $(".lined").linedtextarea();
+		

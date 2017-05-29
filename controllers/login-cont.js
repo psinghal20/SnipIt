@@ -81,13 +81,19 @@ exports.checksignin = function (req,res,next){
 }
 
 exports.protected_page_get = function(req,res){
-	models.get_user_upload_data(req.session.user.userid,function(err,result){
+	models.get_user_upload_data(req.session.user.userid,function(err,upload_result){
 			if(err){
 				res.render('upload');
 			}
 			else{
-				
-				res.render('upload',{userid:req.session.user.userid,result:result});
+				models.get_star_data(req.session.user.userid,function(err,star_result){
+					if(err){
+						console.log(err);
+					}
+					else{
+						res.render('upload',{userid:req.session.user.userid,upload_result:upload_result,star_result:star_result});
+					}
+				});
 			}
 	});
 }

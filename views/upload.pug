@@ -9,8 +9,15 @@ html
 		form(id='uploadForm' action='/upload' method='post' encType='multipart/form-data')
 			input(type='file' name='sampleFile')
 			input(type='submit' value='upload!')
+		h2 Uploads
 		ul
-			each file in result
+			each file in upload_result
 				li 
 					a(href='/protected_page/'+file.filename) #{file.filename}
+		
+		h2 Stars
+		ul
+			each star in star_result
+				li
+					a(href='/search/'+star.file_user+'/'+star.filename) #{star.file_user+'/'+star.filename}
 		a(href='/logout') logout

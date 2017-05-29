@@ -52,3 +52,7 @@ exports.insert_star_data = function(userid,fileuser,filename,callback){
 exports.update_star_count = function(fileuser,filename,callback){
 	connection.query("UPDATE uploads SET Stars=Stars+1 WHERE userid='"+fileuser+"' AND filename='"+filename+"'",callback);
 }
+
+exports.get_star_data = function(userid,callback){
+	connection.query('SELECT * FROM Stars where userid = ?',userid,callback);
+}
