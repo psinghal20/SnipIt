@@ -40,3 +40,7 @@ exports.delete_upload_data = function(userid,filename,callback){
 exports.write_file_data = function(userid,filename,content,callback){
 	fs.writeFile('uploads/'+userid+'/'+filename,content,'utf8',callback);
 }
+
+exports.search_file_data = function(keyword,callback){
+	connection.query("SELECT * FROM uploads WHERE filename LIKE '%"+keyword+"%'",callback);
+}

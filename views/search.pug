@@ -1,0 +1,10 @@
+html
+	body
+		form(action="/search" method="get")
+			input(name="keyword" type="text" required placeholder="Search")
+			input(type="submit" value="Search")
+
+		ul
+			each file in result
+				li 
+					a(href="/search/"+file.userid+'/'+file.filename) #{file.filename}

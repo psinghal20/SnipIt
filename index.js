@@ -23,6 +23,6 @@ app.use('/',routes);
 app.set('view engine', 'pug');
 app.set('views','./views');
 
-http.listen(3340,function(){
-	console.log('listening on *:3340');
+http.listen(3370,function(){
+	console.log('listening on *:3370');
 });

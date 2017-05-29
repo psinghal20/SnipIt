@@ -1,5 +1,10 @@
 html
 	body
+		form(action="/search" method="get")
+			input(name="keyword" type="text" required placeholder="Search")
+			input(type="submit" value="Search")
+
+
 		h4 #{userid}
 		form(id='uploadForm' action='/upload' method='post' encType='multipart/form-data')
 			input(type='file' name='sampleFile')

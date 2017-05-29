@@ -176,3 +176,34 @@ exports.download_get = function(req,res){
 	var filename = req.params.filename;
 	res.download('uploads/'+req.session.user.userid+'/'+filename);
 }
+
+exports.search_get = function(req,res){
+	var keyword = req.query.keyword;
+	models.search_file_data(keyword,function(err,result){
+		if (err) {
+			console.log(err);
+		}
+		else{
+			if(result.length<=0){
+				res.send("Zero results");
+			}
+			else{
+				console.log(result);
+				res.render('search',{result:result,keyword:keyword});
+			}
+		}
+	});
+}
+
+exports.search_result_get = function(req,res){
+	var userid = req.params.userid;
+	var filename =req.params.filename;
+	models.get_file_data(userid,filename,function(err,contents){
+		if(err){
+			console.log(err);
+		}
+		else{
+			res.render('files',{file:filename,contents:contents,k:1})
+		}
+	});
+}

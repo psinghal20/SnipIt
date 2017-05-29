@@ -28,4 +28,8 @@ router.post('/edit/:filename',loginCont.edit_post);
 
 router.get('/download/:filename',loginCont.download_get);
 
+router.get('/search',loginCont.search_get);
+
+router.get('/search/:userid/:filename',loginCont.search_result_get);
+
 module.exports = router;
