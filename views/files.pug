@@ -1,11 +1,15 @@
 html
 	body
 		h4 #{file}
-		unless k
+		if fileuser
+			a(href='/star/'+fileuser+'/'+file) Star
+			br
+			a(href='/download/'+fileuser+'/'+file) Download
+		else
 			a(href='/delete/'+file) remove
 			br
 			a(href='/edit/'+file) edit
-		br
-		a(href='/download/'+file) Download
+			br
+			a(href='/download/'+file) Download
 		pre
 			| #{contents}

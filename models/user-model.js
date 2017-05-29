@@ -44,3 +44,11 @@ exports.write_file_data = function(userid,filename,content,callback){
 exports.search_file_data = function(keyword,callback){
 	connection.query("SELECT * FROM uploads WHERE filename LIKE '%"+keyword+"%'",callback);
 }
+
+exports.insert_star_data = function(userid,fileuser,filename,callback){
+		connection.query("INSERT INTO Stars (userid,file_user,filename) VALUES ('"+userid+"','"+fileuser+"','"+filename+"')",callback);
+}
+
+exports.update_star_count = function(fileuser,filename,callback){
+	connection.query("UPDATE uploads SET Stars=Stars+1 WHERE userid='"+fileuser+"' AND filename='"+filename+"'",callback);
+}

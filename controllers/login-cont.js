@@ -174,7 +174,13 @@ exports.edit_post = function(req,res){
 
 exports.download_get = function(req,res){
 	var filename = req.params.filename;
-	res.download('uploads/'+req.session.user.userid+'/'+filename);
+	var fileuser = req.params.fileuser;
+	if(fileuser){
+		res.download('uploads/'+fileuser+'/'+filename);
+	}
+	else{
+		res.download('uploads/'+req.session.user.userid+'/'+filename);
+	}
 }
 
 exports.search_get = function(req,res){
@@ -196,14 +202,37 @@ exports.search_get = function(req,res){
 }
 
 exports.search_result_get = function(req,res){
-	var userid = req.params.userid;
+	var fileuser = req.params.fileuser;
 	var filename =req.params.filename;
-	models.get_file_data(userid,filename,function(err,contents){
+	models.get_file_data(fileuser,filename,function(err,contents){
 		if(err){
 			console.log(err);
 		}
 		else{
-			res.render('files',{file:filename,contents:contents,k:1})
+			res.render('files',{file:filename,fileuser:fileuser,contents:contents})
 		}
+	});
+}
+
+exports.star_get = function(req,res){
+	var fileuser = req.params.fileuser;
+	var filename =req.params.filename;
+	var userid = req.session.user.userid;
+	models.insert_star_data(userid,fileuser,filename,function(err,result){
+		 if(err){
+		 	console.log(err);
+		 }
+		 else{
+		 	models.update_star_count(fileuser,filename,function(err,result){
+		 		if(err){
+		 			console.log(err);
+		 		}
+		 		else{
+		 			console.log(result);
+		 			console.log('starred');
+		 			res.redirect('/search/'+fileuser+'/'+filename);
+		 		}
+		 	});
+		 }
 	});
 }

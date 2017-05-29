@@ -30,6 +30,10 @@ router.get('/download/:filename',loginCont.download_get);
 
 router.get('/search',loginCont.search_get);
 
-router.get('/search/:userid/:filename',loginCont.search_result_get);
+router.get('/search/:fileuser/:filename',loginCont.search_result_get);
+
+router.get('/download/:fileuser/:filename',loginCont.download_get);
+
+router.get('/star/:fileuser/:filename',loginCont.star_get);
 
 module.exports = router;
