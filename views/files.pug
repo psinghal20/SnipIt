@@ -1,3 +1,4 @@
+doctype html
 html
 	head
 		link(rel="stylesheet" type="text/css" href="/jquery-linedtextarea.css")
@@ -19,6 +20,10 @@ html
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript")
 
 		script(src="/jquery-linedtextarea.js" type="text/javascript")
+		
+		script(src="/autosize.js" type="text/javascript")
+		
+		script autosize(document.querySelectorAll('textarea'));
 		
 		script $(".lined").linedtextarea();
 		
