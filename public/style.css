@@ -1,5 +1,5 @@
 #loginbox {
-	position: relative;
+	position: fixed;
     top: 220px;
    	border: 2px solid skyblue;
    	border-radius:10px;
@@ -12,7 +12,7 @@
 	padding-top: 5px;
 }
 body{
-	background-color: rgb(19, 20, 19)
+	background-color: rgb(19, 20, 19);
 }
 .nav-pills > li > a, .nav-pills > li > a:focus {
     color:white;
@@ -35,4 +35,29 @@ body{
 #error{
 	color: white;
 	text-align: center;
+}
+#title{
+	color:white;
+	text-align: center;
+	font-family: 'Nunito', sans-serif;
+	font-size: 80px;
+}
+.navbar-brand{
+	font-family: 'Lora';
+	font-size: 30px;
+}
+#search-btn{
+	border-top-right-radius: 20px; 
+	border-bottom-right-radius: 20px; 
+}
+.heading{
+	color:white;
+	font-family:'Nunito';
+	font-weight:bold;
+	color:rgb(130, 130, 130);
+	text-align:center;
+}
+.list-group-item{
+	color:white;
+	background-color: white;
 }
