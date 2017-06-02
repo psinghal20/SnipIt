@@ -1,11 +1,53 @@
 doctype html
-html
+html(lang="en")
 	head
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+		link(rel="stylesheet" type="text/css" href="/style.css")
+		link(href="https://fonts.googleapis.com/css?family=Lora:700|Montserrat" rel="stylesheet")
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+
 		title Login
 	body
-		if(message)
-			h4 #{message}
-		form(action="/login" method="POST")
-			input(name="userid" type="text" required placeholder="User ID")
-			input(name="password" type="password" required placeholder="Password")
-			button(type="submit") Login
+		div(class="container col-sm-4 col-sm-offset-4" id="loginbox")
+			ul(class="nav nav-pills")
+				li(class="active")
+					a(data-toggle="pill" href="#login") Login
+				li
+					a(data-toggle="pill" href="#signup") Sign Up
+			div(class="tab-content")
+				div(id="login" class="tab-pane fade in active")
+					if(message)
+						h4(id="error") #{message}
+					form(action="/login" method="POST")
+						div(class="row")
+							div(class="col-sm-10 col-sm-offset-1")
+								input(name="userid" type="text" class="form-control" required placeholder="User ID")
+						br
+						div(class="row")
+							div(class="col-sm-10 col-sm-offset-1")
+								input(name="password" type="password" class="form-control" required placeholder="Password")
+						br
+						div(class="row")
+							div(class="col-sm-10 col-sm-offset-1 text-center")
+								button(type="submit" class="btn btn-default") Login
+
+				div(id="signup" class="tab-pane fade")
+					if(message)
+						h4(id="error") #{message}
+					form(action="/signup" method="POST")
+						div(class="row")
+							div(class="col-sm-10 col-sm-offset-1")
+								input(name="userid" type="text" class="form-control" required placeholder="User ID")
+						br
+						div(class="row")
+							div(class="col-sm-10 col-sm-offset-1")
+								input(name="password" type="password" class="form-control" required placeholder="Password")
+						br
+						div(class="row")
+							div(class="col-sm-10 col-sm-offset-1 text-center")
+								button(type="submit" class="btn btn-default") Login
+
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")

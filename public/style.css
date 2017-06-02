@@ -1,0 +1,38 @@
+#loginbox {
+	position: relative;
+    top: 220px;
+   	border: 2px solid skyblue;
+   	border-radius:10px;
+   	padding: 20px;
+}
+.form-control{
+	border-radius: 20px;
+}
+.tab-content{
+	padding-top: 5px;
+}
+body{
+	background-color: rgb(19, 20, 19)
+}
+.nav-pills > li > a, .nav-pills > li > a:focus {
+    color:white;
+    font-family: 'Lora';
+    font-size: 20px; 
+    background-color:rgba(0,0,0,0);
+}
+.nav-pills > li > a:hover{
+	background-color: rgba(108, 109, 108,0.5);
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color:white;
+    background-color:rgba(0,0,0,0);
+    border-bottom: 2px solid skyblue;
+    border-radius: 0px;
+}
+#login,#signup{
+	padding-top: 10px;
+}
+#error{
+	color: white;
+	text-align: center;
+}

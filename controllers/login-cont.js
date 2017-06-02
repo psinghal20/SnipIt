@@ -54,7 +54,7 @@ exports.signup_post = function(req,res){
 		models.insert_user_data(user.userid,user.passwordhash,function(err,result){
 			if(err){
 				console.log(err);
-				res.render('signup',{message:'User already exists!'});
+				res.render('login',{message:'User already exists!'});
 			}else{
 				req.session.user = user;
 				res.redirect('/protected_page');
