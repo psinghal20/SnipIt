@@ -2,9 +2,11 @@
 
 A simple code snippet management and sharing portal.
 
-##set up
+## set up
+
 Clone the repositry
-Enter your MySQL database details in config file
+Enter your MySQL database details in create-database and config file
+Run the create-database file
 Run server
 
 ## Screenshot
