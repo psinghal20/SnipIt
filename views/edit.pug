@@ -1,19 +1,45 @@
 doctype html
-html
+html(lang="en")
 	head
+		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+		link(rel="stylesheet" type="text/css" href="/style.css")
+		link(href="https://fonts.googleapis.com/css?family=Lora:700|Nunito" rel="stylesheet")
+		meta(charset="utf-8")
+		script(src="https://use.fontawesome.com/5c827fb0fd.js")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
 		link(rel="stylesheet" type="text/css" href="/jquery-linedtextarea.css")
 	body
+		nav(class="navbar navbar-inverse")
+			div(class="container-fluid")
+				div(class="navbar-header")
+					a(class="navbar-brand" href="/protected_page") SnipIt
+				form(class="navbar-form navbar-left" action="/search" method="get")
+					div(class="input-group")
+						input(class="form-control" name="keyword" type="text" required placeholder="Search")
+						div(class="input-group-btn")
+							button(id="search-btn" class="btn btn-default" type="submit")
+								i(class="glyphicon glyphicon-search")
+				
+				ul(class="nav navbar-nav navbar-right")
+					li
+						a(href='/logout' id="logout-button") 
+							i(class="fa fa-sign-out fa-lg" aria-hidden="true") 
+								span(style="font-size: 20px;font-family: 'Lora';") logout
+		
+		h1(class="heading") #{file}
 		form(action='/edit/'+file, method='POST')
-			
-			textarea(name='editarea' class='lined' cols='100')=contents
-			
-			button(type="submit") Submit Changes
+			div(class="col-sm-6")
+				textarea(name='editarea' class='lined' cols='100')=contents
+			div(class="container text-center col-sm-3 col-sm-offset-2")
+				button(type="submit") Submit Changes
 
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript")
 
 		script(src="/jquery-linedtextarea.js" type="text/javascript")
 
 		script(src="/autosize.js" type="text/javascript")
+
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
 		
 		script autosize(document.querySelectorAll('textarea'));$(".lined").linedtextarea();
 		
