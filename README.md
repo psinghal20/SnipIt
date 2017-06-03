@@ -13,6 +13,6 @@ profile
 Files
 ![image-3](screenshots/image3.png "#3")
 EditArea
-![image-4](screenshots/image3.png "#4")
+![image-4](screenshots/image4.png "#4")
 Search
-![image-5](screenshots/image3.png "#5")
+![image-5](screenshots/image5.png "#5")
