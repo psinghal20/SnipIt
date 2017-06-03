@@ -2,6 +2,11 @@
 
 A simple code snippet management and sharing portal.
 
+##set up
+Clone the repositry
+Enter your MySQL database details in config file
+Run server
+
 ## Screenshot
 
 Login
