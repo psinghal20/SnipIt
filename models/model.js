@@ -1,4 +1,4 @@
-var connection = require('./../config.sample');
+var connection = require('./../config');
 var fs = require('fs');
 var mkdir = require('make-dir');
 var fse = require('fs-extra');
