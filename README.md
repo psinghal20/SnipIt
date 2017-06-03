@@ -3,15 +3,16 @@
 A simple code snippet management and sharing portal.
 
 ## Screenshot
-##Login
+
+Login
 ![image-1](screenshots/image1.png "#1")
 
-##profile
+profile
 ![image-2](screenshots/image2.png "#2")
 
-##Files
+Files
 ![image-3](screenshots/image3.png "#3")
-##EditArea
+EditArea
 ![image-4](screenshots/image3.png "#4")
-##Search
+Search
 ![image-5](screenshots/image3.png "#5")
