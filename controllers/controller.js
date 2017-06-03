@@ -1,6 +1,5 @@
 var bcrypt = require('bcrypt');
-var models = require('./../models/user-model');
-var connection = require('./../config');
+var models = require('./../models/model');
 
 exports.login_get = function(req,res){
 	res.render('login');

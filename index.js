@@ -5,7 +5,7 @@ var http = require('http').Server(app);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-var routes = require('./routes/login.js');
+var routes = require('./routes/routes');
 
 app.use(fileupload());
 app.use(bodyParser.urlencoded({extended:true}));

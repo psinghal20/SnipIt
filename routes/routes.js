@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var loginCont = require('./../controllers/login-cont')
+var loginCont = require('./../controllers/controller')
 
 router.get('/login',loginCont.login_get);
 
